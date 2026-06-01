@@ -218,12 +218,10 @@ export default function EditorPage() {
                   <th className="text-left px-4 py-3 font-medium text-gray-500">Наименование</th>
                   <th className="text-center px-3 py-3 font-medium text-gray-500 w-16">Кол-во</th>
                   <th className="text-center px-3 py-3 font-medium text-gray-500 w-16">Ед.</th>
-                  <th className="text-right px-3 py-3 font-medium text-gray-500 w-32">
-                    Цена ₽
-                    <div className="text-xs font-normal text-gray-400 leading-none mt-0.5">редактируется</div>
-                  </th>
+                  <th className="text-right px-3 py-3 font-medium text-gray-500 w-32">Цена ₽</th>
                   <th className="text-center px-3 py-3 font-medium text-gray-500 w-20">Скидка %</th>
                   <th className="text-right px-3 py-3 font-medium text-gray-500 w-32">Сумма</th>
+                  <th className="text-center px-2 py-3 font-medium text-gray-400 w-10 text-xs">🌐</th>
                   <th className="w-8"></th>
                 </tr>
               </thead>
@@ -281,9 +279,6 @@ export default function EditorPage() {
                         className="w-full text-right bg-transparent focus:outline-none font-medium"
                         placeholder="0.00"
                       />
-                      {item.price_found != null && item.price_found !== item.price_final && (
-                        <div className="text-xs text-gray-400 text-right">на сайте: {fmt(item.price_found)}</div>
-                      )}
                     </td>
                     <td className="px-3 py-3">
                       <input
@@ -297,6 +292,20 @@ export default function EditorPage() {
                     </td>
                     <td className="px-3 py-3 text-right font-medium text-gray-900">
                       {fmt(rowTotal(item))} ₽
+                    </td>
+                    <td className="px-2 py-3 text-center">
+                      {item.price_found != null ? (
+                        <a
+                          href={item.url ?? '#'}
+                          target="_blank"
+                          title={`На сайте: ${fmt(item.price_found)} ₽`}
+                          className="inline-flex items-center justify-center w-6 h-6 rounded bg-green-50 text-green-600 hover:bg-green-100 text-xs"
+                        >
+                          ₽
+                        </a>
+                      ) : (
+                        <span className="text-gray-200 text-xs">—</span>
+                      )}
                     </td>
                     <td className="px-2 py-3">
                       <button
