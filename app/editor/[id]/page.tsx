@@ -218,8 +218,10 @@ export default function EditorPage() {
                   <th className="text-left px-4 py-3 font-medium text-gray-500">Наименование</th>
                   <th className="text-center px-3 py-3 font-medium text-gray-500 w-16">Кол-во</th>
                   <th className="text-center px-3 py-3 font-medium text-gray-500 w-16">Ед.</th>
-                  <th className="text-right px-3 py-3 font-medium text-gray-500 w-32">Цена (сайт)</th>
-                  <th className="text-right px-3 py-3 font-medium text-gray-500 w-32">Цена (КП)</th>
+                  <th className="text-right px-3 py-3 font-medium text-gray-500 w-32">
+                    Цена ₽
+                    <div className="text-xs font-normal text-gray-400 leading-none mt-0.5">редактируется</div>
+                  </th>
                   <th className="text-center px-3 py-3 font-medium text-gray-500 w-20">Скидка %</th>
                   <th className="text-right px-3 py-3 font-medium text-gray-500 w-32">Сумма</th>
                   <th className="w-8"></th>
@@ -269,9 +271,6 @@ export default function EditorPage() {
                         className="w-full text-center bg-transparent focus:outline-none"
                       />
                     </td>
-                    <td className="px-3 py-3 text-right text-gray-400 text-xs">
-                      {fmt(item.price_found)}
-                    </td>
                     <td className="px-3 py-3">
                       <input
                         type="number"
@@ -282,6 +281,9 @@ export default function EditorPage() {
                         className="w-full text-right bg-transparent focus:outline-none font-medium"
                         placeholder="0.00"
                       />
+                      {item.price_found != null && item.price_found !== item.price_final && (
+                        <div className="text-xs text-gray-400 text-right">на сайте: {fmt(item.price_found)}</div>
+                      )}
                     </td>
                     <td className="px-3 py-3">
                       <input
